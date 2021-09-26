@@ -19,7 +19,7 @@ defmodule Foreperson.Process do
   def watch(cmd, args) when is_list(args) do
     {args, opts} = Enum.split_while(args, &is_binary(&1))
     {wrap, opts} = Keyword.pop(opts, :wrap, true)
-    opts = Keyword.merge([into: IO.stream(:stdio, :line), stderr_to_stdout: true], opts)
+    opts = Keyword.merge([into: Foreperson.stream(cmd), stderr_to_stdout: true], opts)
 
     {args, cmd} =
       case wrap do
