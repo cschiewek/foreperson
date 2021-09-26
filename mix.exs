@@ -4,10 +4,13 @@ defmodule Foreperson.MixProject do
   def project do
     [
       app: :foreperson,
+      name: "foreperson",
       version: "0.1.0",
       elixir: "~> 1.12",
-      start_permanent: true,
-      deps: deps()
+      start_permanent: Mix.env() == :prod,
+      description: "Process runner for external dependencies in local dev environments",
+      deps: deps(),
+      package: package()
     ]
   end
 
@@ -24,6 +27,15 @@ defmodule Foreperson.MixProject do
   defp deps do
     [
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false}
+    ]
+  end
+
+  defp package do
+    [
+      maintainers: ["Curtis Schiewek"],
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/phoenixframework/phoenix"},
+      files: ~w(lib priv LICENSE.md mix.exs README.md .formatter.exs)
     ]
   end
 end
