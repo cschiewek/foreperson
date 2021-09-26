@@ -1,0 +1,15 @@
+name: Continuous Deployment
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  deploy:
+    runs-on: 'ubuntu-latest'
+    steps:
+    - uses: actions/checkout@v1
+    - name: Publish to Hex.pm
+      uses: erlangpack/github-action@v1
+      env:
+        HEX_API_KEY: ${{ secrets.HEX_API_KEY }}
