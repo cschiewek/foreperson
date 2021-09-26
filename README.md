@@ -21,7 +21,7 @@ See the [`Foreperson`](https://github.com/cschiewek/foreperson/blob/main/lib/for
 
 ### Why?
 
-I end up needing to run multiple instances of different versions or external dependencies for my Elixir apps. asdf is great for switching versions, but there's no great story for starting and stoping those processes.
+I end up needing to run multiple instances of different versions of external dependencies for my Elixir apps. asdf is great for switching versions, but there's no great story for starting and stoping those processes.
 
 I typically end up using docker-compose, but Docker on MacOS has some frustrating issues.  I've also used foreman in the passed to varying degrees of success. I was looking for a similar Elixir, but couldn't find anything, so here we are.
 
