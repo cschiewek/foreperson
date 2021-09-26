@@ -1,5 +1,7 @@
 # Foreperson
 
+[![Continuous Integration](https://github.com/cschiewek/foreperson/actions/workflows/ci.yml/badge.svg)](https://github.com/cschiewek/foreperson/actions/workflows/ci.yml)
+
 Generic process runner.  Inspired by [foreman](https://github.com/ddollar/foreman) and [Phoenix endpoint watchers](https://hexdocs.pm/phoenix/Phoenix.Endpoint.html#module-runtime-configuration).
 
 _Please don't use this in production.  It's meant for local development and testing only.  It's designed for convenience, not resiliency._
