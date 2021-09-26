@@ -117,3 +117,17 @@ jobs:
           key: build-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
           restore-keys: build-
       - run: mix format --check-formatted
+
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    needs: [compile]
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          tag: ${{ needs.compile.outputs.version }}
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
