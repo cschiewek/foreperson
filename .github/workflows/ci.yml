@@ -1,0 +1,119 @@
+name: Continuous Integration
+
+on:
+  push
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    name: Compile
+    outputs:
+      version: ${{ steps.set_version.outputs.version }}
+
+    steps:
+      - uses: actions/checkout@v1.0.0
+      - uses: erlef/setup-elixir@v1
+        with:
+          otp-version: 24.x
+          elixir-version: 1.12.x
+      - uses: actions/cache@v1
+        id: deps-cache
+        with:
+          path: deps
+          key: deps-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
+          restore-keys: deps-
+      - uses: actions/cache@v1
+        id: build-cache
+        with:
+          path: _build
+          key: build-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
+          restore-keys: build-
+      - if: steps.deps-cache.outputs.cache-hit != 'true'
+        run: mix deps.get
+      - run: mix
+        name: Compile dev
+      - run: mix
+        name: Compile test
+        env:
+          MIX_ENV: test
+      - id: set_version
+        name: Set version
+        run: echo "::set-output name=version::$(mix run --no-start -e 'IO.puts Mix.Project.config[:version]' | tail -n 1)"
+
+  test:
+    runs-on: ubuntu-latest
+    name: Test
+    needs: compile
+
+    steps:
+      - uses: actions/checkout@v1.0.0
+      - uses: erlef/setup-elixir@v1
+        with:
+          otp-version: 24.x
+          elixir-version: 1.12.x
+      - uses: actions/cache@v1
+        id: deps-cache
+        with:
+          path: deps
+          key: deps-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
+          restore-keys: deps-
+      - uses: actions/cache@v1
+        id: build-cache
+        with:
+          path: _build
+          key: build-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
+          restore-keys: build-
+      - run: mix test
+        env:
+          CONTINUUM_DB_USERNAME: postgres
+          CONTINUUM_DB_PASSWORD: postgres
+
+  lint:
+    runs-on: ubuntu-latest
+    name: Lint
+    needs: compile
+
+    steps:
+      - uses: actions/checkout@v1.0.0
+      - uses: erlef/setup-elixir@v1
+        with:
+          otp-version: 24.x
+          elixir-version: 1.12.x
+      - uses: actions/cache@v1
+        id: deps-cache
+        with:
+          path: deps
+          key: deps-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
+          restore-keys: deps-
+      - uses: actions/cache@v1
+        id: build-cache
+        with:
+          path: _build
+          key: build-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
+          restore-keys: build-
+      - run: mix credo
+
+  format:
+    runs-on: ubuntu-latest
+    name: Format
+    needs: compile
+
+    steps:
+      - uses: actions/checkout@v1.0.0
+      - uses: erlef/setup-elixir@v1
+        with:
+          otp-version: 24.x
+          elixir-version: 1.12.x
+      - uses: actions/cache@v1
+        id: deps-cache
+        with:
+          path: deps
+          key: deps-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
+          restore-keys: deps-
+      - uses: actions/cache@v1
+        id: build-cache
+        with:
+          path: _build
+          key: build-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
+          restore-keys: build-
+      - run: mix format --check-formatted
