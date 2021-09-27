@@ -13,10 +13,10 @@ defmodule Foreperson.Process do
   end
 
   def start_link({cmd, args}) do
-    Task.start_link(__MODULE__, :watch, [to_string(cmd), args])
+    Task.start_link(__MODULE__, :run, [to_string(cmd), args])
   end
 
-  def watch(cmd, args) when is_list(args) do
+  def run(cmd, args) when is_list(args) do
     {args, opts} = Enum.split_while(args, &is_binary(&1))
     {wrap, opts} = Keyword.pop(opts, :wrap, true)
     opts = Keyword.merge([into: Foreperson.stream(cmd), stderr_to_stdout: true], opts)
