@@ -1,16 +1,21 @@
 defmodule Foreperson.MixProject do
   use Mix.Project
 
+  @version "0.1.3"
+  @source_url "https://github.com/cschiewek/foreperson"
+
   def project do
     [
       app: :foreperson,
       name: "foreperson",
-      version: "0.1.2",
+      version: @version,
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
       description: "Process runner for external dependencies in local dev environments",
+      source_url: @source_url,
       deps: deps(),
-      package: package()
+      package: package(),
+      docs: docs()
     ]
   end
 
@@ -35,8 +40,17 @@ defmodule Foreperson.MixProject do
     [
       maintainers: ["Curtis Schiewek"],
       licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/cschiewek/foreperson"},
+      links: %{"GitHub" => @source_url},
       files: ~w(lib priv LICENSE.md mix.exs README.md .formatter.exs)
+    ]
+  end
+
+  defp docs do
+    [
+      main: "readme",
+      extras: ["README.md"],
+      source_ref: "v#{@version}",
+      source_url: @source_url
     ]
   end
 end

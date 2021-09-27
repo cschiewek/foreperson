@@ -1,9 +1,5 @@
 defmodule Foreperson.Formatter do
-  @moduledoc """
-  Module that implements Collectable in order to prefix output destined for :stdio
-
-  Basically the same as IO.stream(:stdio, :line), but with the prefix support.
-  """
+  @moduledoc false
   defstruct prefix: nil
 
   defimpl Collectable do
