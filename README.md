@@ -20,28 +20,28 @@ end
 
 See the [`Foreperson`](https://hexdocs.pm/foreperson/Foreperson.html#content) module doc for configuration options.
 
-### Running in seperate process or shell
+## Running in seperate process or shell
 
 By default, Foreperson will run under your applications main supervisor.  However, can run it in it's own process in a different shell.
 
 Set runtime to false in your `mix.exs` deps
-```
+```elixir
 {:foreperson, "~> 0.1", only: [:dev, :test], runtime: false}
 ```
 
 Then start it via the mix task
-```
+```shell
 $ mix foreperson.start
 ```
 
-### Why?
+## Why?
 
 I end up needing to run multiple instances of different versions of external dependencies for my Elixir apps. asdf is great for switching versions, but there's no great story for starting and stoping those processes.
 
 I typically end up using docker-compose, but Docker on MacOS has some frustrating issues.  I've also used foreman in the passed to varying degrees of success. I was looking for a similar solution in Elixir, but couldn't find anything, so here we are.
 
 This is probably a terrible way to solve this.  If you have ideas on how to make it suck less, please let me know.
-### TODO:
+## TODO:
 - Replace borrowed phoenix code
 - Enable startup in seperate shell/process via mix task
 - Support procfiles?
