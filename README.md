@@ -8,18 +8,17 @@ _Please don't use this in production.  It's meant for local development and test
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `foreperson` to your list of dependencies in `mix.exs`:
+The package can be installed by adding `foreperson` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:foreperson, "~> 0.1.0"}
+    {:foreperson, "~> 0.1.0", only: [:dev, :test]}
   ]
 end
 ```
 
-See the [`Foreperson`](https://github.com/cschiewek/foreperson/blob/main/lib/foreperson.ex#L2-L34) module doc for configuration options.
+See the [`Foreperson`](https://hexdocs.pm/foreperson/Foreperson.html#content) module doc for configuration options.
 
 ### Why?
 
