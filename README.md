@@ -73,7 +73,7 @@ I typically end up using docker-compose, but Docker on MacOS has some frustratin
 
 This is probably a terrible way to solve this.  If you have ideas on how to make it suck less, please let me know.
 ## TODO:
-- Replace borrowed phoenix code
-- Support procfiles?
+- Support procfiles
+- Binaries via Bakeware
 - Better "waiting":
   - Check for open port, or file existence, etc
