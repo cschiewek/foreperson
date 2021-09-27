@@ -24,7 +24,7 @@ See the [`Foreperson`](https://hexdocs.pm/foreperson/Foreperson.html#content) mo
 
 I end up needing to run multiple instances of different versions of external dependencies for my Elixir apps. asdf is great for switching versions, but there's no great story for starting and stoping those processes.
 
-I typically end up using docker-compose, but Docker on MacOS has some frustrating issues.  I've also used foreman in the passed to varying degrees of success. I was looking for a similar Elixir, but couldn't find anything, so here we are.
+I typically end up using docker-compose, but Docker on MacOS has some frustrating issues.  I've also used foreman in the passed to varying degrees of success. I was looking for a solution similar Elixir, but couldn't find anything, so here we are.
 
 This is probably a terrible way to solve this.  If you have ideas on how to make it suck less, please let me know.
 ### TODO:
