@@ -13,12 +13,26 @@ The package can be installed by adding `foreperson` to your list of dependencies
 ```elixir
 def deps do
   [
-    {:foreperson, "~> 0.1.0", only: [:dev, :test]}
+    {:foreperson, "~> 0.1", only: [:dev, :test]}
   ]
 end
 ```
 
 See the [`Foreperson`](https://hexdocs.pm/foreperson/Foreperson.html#content) module doc for configuration options.
+
+### Running in seperate process or shell
+
+By default, Foreperson will run under your applications main supervisor.  However, can run it in it's own process in a different shell.
+
+Set runtime to false in your `mix.exs` deps
+```
+{:foreperson, "~> 0.1", only: [:dev, :test], runtime: false}
+```
+
+Then start it via the mix task
+```
+$ mix foreperson.start
+```
 
 ### Why?
 
