@@ -5,7 +5,7 @@ defmodule Foreperson.MixProject do
     [
       app: :foreperson,
       name: "foreperson",
-      version: "0.1.0",
+      version: "0.1.1",
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
       description: "Process runner for external dependencies in local dev environments",
@@ -35,7 +35,7 @@ defmodule Foreperson.MixProject do
     [
       maintainers: ["Curtis Schiewek"],
       licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/phoenixframework/phoenix"},
+      links: %{"GitHub" => "https://github.com/cschiewek/foreperson"},
       files: ~w(lib priv LICENSE.md mix.exs README.md .formatter.exs)
     ]
   end
