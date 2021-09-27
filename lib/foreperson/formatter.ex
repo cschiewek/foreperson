@@ -9,7 +9,7 @@ defmodule Foreperson.Formatter do
 
     defp into(formatter, prefix) do
       fn
-        :ok, {:cont, x} -> IO.write(:stdio, (prefix && "👷[#{prefix}] ") <> x)
+        :ok, {:cont, x} -> IO.write(:stdio, "👷[#{prefix}] " <> x)
         :ok, _ -> formatter
       end
     end

@@ -19,7 +19,8 @@ defmodule Foreperson.Process do
   def run(cmd, args) when is_list(args) do
     {args, opts} = Enum.split_while(args, &is_binary(&1))
     {wrap, opts} = Keyword.pop(opts, :wrap, true)
-    opts = Keyword.merge([into: Foreperson.stream(cmd), stderr_to_stdout: true], opts)
+    {prefix, opts} = Keyword.pop(opts, :prefix, cmd)
+    opts = Keyword.merge([into: Foreperson.stream(prefix), stderr_to_stdout: true], opts)
 
     {args, cmd} =
       case wrap do
